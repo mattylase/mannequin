@@ -5,7 +5,9 @@ import industries.laser.mannequin.validators.Validator
 
 class MannequinValidated<T>(val view: View) {
     var event: ValidationEvent? = null
-    lateinit var validator: Validator<T>
+    var validator: Validator<T>? = null
+    var notifier: ((View, Boolean) -> Unit)? = null
+    var isValid: Boolean = true
 
     infix fun during(validationEvent: ValidationEvent): MannequinValidated<T> {
         this.event = validationEvent
@@ -14,6 +16,11 @@ class MannequinValidated<T>(val view: View) {
 
     infix fun via(function: T.() -> Boolean): MannequinValidated<T> {
         this.validator = function
+        return this
+    }
+
+    infix fun notifies(function: (View, Boolean) -> Unit): MannequinValidated<T> {
+        this.notifier = function
         return this
     }
 }

@@ -24,8 +24,25 @@ class Mannequin {
     private fun listenToEditText(validated: MannequinValidated<String>) {
         val editText = validated.view as EditText
         when (validated.event) {
-            ValidationEvent.OnKey -> editText.doAfterTextChanged {
-                validated.validator(it.toString())
+            ValidationEvent.OnKey -> editText.doAfterTextChanged { editable ->
+                validated.validator?.let { validator ->
+                    val valid = validator(editable.toString())
+                    if (validated.isValid != valid) {
+                        validated.isValid = valid
+                        validated.notifier?.invoke(editText, valid)
+                    }
+                }
+            }
+            ValidationEvent.OnFocusLost -> editText.setOnFocusChangeListener { view, focused ->
+                if (!focused) {
+                    validated.validator?.let { validator ->
+                        val valid = validator(editText.text.toString())
+                        if (validated.isValid != valid) {
+                            validated.isValid = valid
+                            validated.notifier?.invoke(editText, valid)
+                        }
+                    }
+                }
             }
         }
     }
