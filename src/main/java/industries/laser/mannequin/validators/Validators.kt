@@ -11,3 +11,9 @@ val Test: Validator<String> = { input ->
     Log.d("Test", input)
     true
 }
+
+fun Length(limit: Int): (String) -> Boolean {
+    return {
+        it.length <= limit
+    }
+}
