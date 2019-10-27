@@ -5,7 +5,6 @@ apply plugin: 'kotlin-android'
 android {
     compileSdkVersion 28
 
-
     defaultConfig {
         minSdkVersion 22
         targetSdkVersion 28
@@ -13,7 +12,6 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -23,6 +21,14 @@ android {
         }
     }
 
+    compileOptions {
+        targetCompatibility = 1.8
+        sourceCompatibility = 1.8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
