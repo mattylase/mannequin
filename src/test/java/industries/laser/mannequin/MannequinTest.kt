@@ -3,7 +3,6 @@ package industries.laser.mannequin
 import android.widget.EditText
 import industries.laser.mannequin.validators.None
 import io.mockk.MockKAnnotations
-import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import org.junit.Before
 import org.junit.Test
