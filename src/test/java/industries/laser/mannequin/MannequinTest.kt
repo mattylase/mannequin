@@ -21,7 +21,5 @@ class MannequinTest {
     @Test
     fun testRegister() {
         val mannequin = Mannequin()
-
-        mannequin validates editText via { false }
     }
 }

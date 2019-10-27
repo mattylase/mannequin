@@ -1,9 +1,13 @@
 package industries.laser.mannequin.validators
 
-import industries.laser.mannequin.MannequinValidated
+import android.util.Log
 
-typealias Validator = (MannequinValidated) -> Boolean
+typealias Validator<T> = (T) -> Boolean
 
-//class None: Validator { override fun validate(mannequinValidated: MannequinValidated) = true }
-fun None(mannequinValidated: MannequinValidated) = true
-
+/* String Validators */
+val None: Validator<Any> = { true }
+val Wrong: Validator<Any> = { false }
+val Test: Validator<String> = { input ->
+    Log.d("Test", input)
+    true
+}
