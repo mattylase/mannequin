@@ -4,10 +4,11 @@ import android.view.View
 import industries.laser.mannequin.validators.Validator
 
 class MannequinValidated<T>(val view: View) {
+    internal var validationFunction: ValidationFunction = null
+    internal var isValid: Boolean = true
     var event: ValidationEvent? = null
     var validator: Validator<T>? = null
     var notifier: ((View, Boolean) -> Unit)? = null
-    var isValid: Boolean = true
 
     infix fun during(validationEvent: ValidationEvent): MannequinValidated<T> {
         this.event = validationEvent
@@ -24,3 +25,5 @@ class MannequinValidated<T>(val view: View) {
         return this
     }
 }
+
+typealias ValidationFunction = (() -> Unit)?
